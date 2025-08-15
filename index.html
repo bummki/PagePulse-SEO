@@ -6,61 +6,144 @@
   <title>PagePulse SEO — On-Page Inspector (Single HTML)</title>
   <meta name="description" content="제목·메타·URL·부제목·이미지 ALT·링크·밀도·TOC·스키마·OG/Twitter·E-E-A-T까지 한 번에 점검하는 오프라인 단일 HTML SEO 체커.">
   <style>
-    :root{--bg:#0b0e13;--card:#121826;--muted:#98a2b3;--text:#e6edf3;--ok:#16a34a;--warn:#f59e0b;--fail:#ef4444;--accent:#22d3ee;--accent2:#00ffa6;--border:#202a3b;--glass:rgba(18,24,38,.55);--glassBorder:rgba(255,255,255,.06)}
+    /* ===== iOS Dark Mode Style ===== */
+    :root {
+      --bg: #000000;
+      --card-bg: #1c1c1e;
+      --input-bg: #2c2c2e;
+      --border: #38383a;
+      --text: rgba(255, 255, 255, 0.95);
+      --muted: #8e8e93;
+      --accent: #0a84ff;
+      --ok: #30d158;
+      --warn: #ff9f0a;
+      --fail: #ff453a;
+    }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Apple SD Gothic Neo,Noto Sans KR,Arial,sans-serif;color:var(--text);background:linear-gradient(180deg,#0a0f1c,#0b1220) fixed}
-    header{position:sticky;top:0;z-index:5;background:rgba(10,15,28,.8);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    header{
+      position:sticky;
+      top:0;
+      z-index:5;
+      background:rgba(28, 28, 30, 0.75);
+      backdrop-filter:blur(12px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
     .wrap{max-width:1200px;margin:0 auto;padding:16px}
-    h1{font-weight:800;letter-spacing:.2px;margin:0;font-size:1.35rem}
+    h1{font-weight:700;letter-spacing:-.2px;margin:0;font-size:1.5rem}
     .sub{color:var(--muted);font-size:.9rem}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-    .card{background:linear-gradient(180deg, rgba(18,24,38,.66), rgba(18,24,38,.38));border:1px solid var(--glassBorder);border-radius:16px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.25);backdrop-filter:blur(12px) saturate(140%);transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease}
-    .card h2{margin:.1rem 0 8px;font-size:1rem}
-    label{display:block;font-size:.85rem;color:var(--muted);margin:6px 0}
-    input,textarea,select{width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:#0b1322;color:var(--text);outline:none}
-    textarea{min-height:220px;resize:vertical}
-    .row{display:flex;gap:8px;flex-wrap:wrap}
-    .btn{cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid var(--border);background:#0c172a;color:#fff;transition:transform .15s ease, background .15s ease, box-shadow .15s ease}
-    .btn:hover{background:#0f1d36;transform:translateY(-1px)}
-    .btn.primary{background:linear-gradient(135deg,#00e5ff,#00ffa6);color:#05202c;border:none;box-shadow:0 6px 20px rgba(0,229,255,.25)}
-    .tag{padding:4px 8px;border-radius:999px;border:1px solid var(--border);font-size:.75rem;color:var(--muted)}
-    .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .kpi > div{padding:12px 12px;border-radius:14px;border:1px solid var(--border);background:#0d1526}
-    .kpi .value{font-size:1.2rem;font-weight:700}
-    .status{display:flex;align-items:center;gap:8px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+    .card{
+      background-color: var(--card-bg);
+      border-radius:16px;
+      padding:20px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .card h2{margin:0 0 16px;font-size:1.1rem; font-weight: 600;}
+    label{
+      display:block;
+      font-size: .75rem;
+      color: var(--muted);
+      margin: 16px 0 6px;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: .5px;
+    }
+    input,textarea,select{
+      width:100%;
+      padding:12px 14px;
+      border-radius:8px;
+      border: 1px solid var(--border);
+      background: var(--input-bg);
+      color: var(--text);
+      outline:none;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    textarea{min-height:200px;resize:vertical}
+    .row{display:flex;gap:12px;flex-wrap:wrap; align-items: center;}
+    .btn{
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content: center;
+      gap:8px;
+      padding:10px 16px;
+      border-radius:8px;
+      border: none;
+      background: var(--input-bg);
+      color: var(--text);
+      font-size: .9rem;
+      font-weight: 600;
+      transition: background-color .2s ease;
+    }
+    .btn:hover{background: #3a3a3c;}
+    .btn:active{transform: scale(0.98);}
+    .btn.primary{
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn.primary:hover{ background: #007aff; }
+    .tag{
+      padding: 5px 10px;
+      border-radius: 999px;
+      background-color: var(--input-bg);
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .kpi{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .kpi > div{padding:12px;border-radius:12px;background:var(--input-bg)}
+    .kpi .value{font-size:1.4rem;font-weight:700}
     .dot{width:10px;height:10px;border-radius:50%}
     .dot.ok{background:var(--ok)} .dot.warn{background:var(--warn)} .dot.fail{background:var(--fail)}
-    .score{font-size:2.2rem;font-weight:800}
-    .progress{height:10px;border-radius:999px;background:#0c1526;border:1px solid var(--border);overflow:hidden}
-    .bar{height:100%;background:linear-gradient(90deg,#00ffa6,#00e5ff)}
-    .checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    .item{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:12px;background:#0d1729;border:1px solid var(--border)}
+    .score{font-size:2.8rem;font-weight:800}
+    .progress{height:8px;border-radius:999px;background:var(--input-bg);overflow:hidden}
+    .bar{height:100%;background:var(--accent)}
+    .checklist{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .item{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:12px;background:var(--input-bg)}
     .item .msg{font-size:.9rem}
     .item .hint{color:var(--muted);font-size:.8rem;margin-top:4px}
     .footer{color:var(--muted);font-size:.8rem;margin-top:16px}
-    details{background:#0d1526;border:1px solid var(--border);border-radius:12px;padding:10px}
-    summary{cursor:pointer}
-    .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;border:1px solid var(--border)}
     .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
     .lang{margin-left:auto}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Monospace}
     .small{font-size:.8rem;color:var(--muted)}
-    .card:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.35);border-color:rgba(255,255,255,.12)}
-    .item.ok{border-left:3px solid var(--ok);box-shadow:0 0 0 1px rgba(22,163,74,.2) inset}
-    .item.warn{border-left:3px solid var(--warn);box-shadow:0 0 0 1px rgba(245,158,11,.2) inset}
-    .item.fail{border-left:3px solid var(--fail);box-shadow:0 0 0 1px rgba(239,68,68,.2) inset}
-    .toast{position:fixed;right:16px;bottom:16px;padding:12px 14px;border-radius:12px;border:1px solid var(--glassBorder);background:rgba(13,21,38,.9);backdrop-filter:blur(10px);box-shadow:0 10px 30px rgba(0,0,0,.3);transform:translateY(10px);opacity:0;transition:all .2s ease;z-index:50}
-    .toast.show{transform:translateY(0);opacity:1}
-    .toast.ok{border-left:3px solid var(--ok)}
-    .toast.warn{border-left:3px solid var(--warn)}
-    .toast.fail{border-left:3px solid var(--fail)}
-    .tag.grade-a-plus,.tag.grade-a{background:linear-gradient(135deg,var(--accent2),var(--accent));color:#05202c;border-color:transparent}
-    .tag.grade-b{background:rgba(34,211,238,.12);border-color:rgba(34,211,238,.35)}
-    .tag.grade-c{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.35)}
-    .tag.grade-d{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.35)}
-    .tag.grade-f{background:rgba(239,68,68,.18);border-color:rgba(239,68,68,.5)}
-    .btn:active{transform:translateY(0) scale(.98)}
+
+    /* ===== iOS Toggle Switch ===== */
+    .toggle-switch-container { display: flex; align-items: center; gap: 10px; margin: 8px 0 4px; padding: 6px 0;}
+    .ios-toggle { position: absolute; opacity: 0; width: 0; height: 0; }
+    .toggle-label {
+        position: relative;
+        display: inline-block;
+        width: 51px;
+        height: 31px;
+        background-color: #39393d;
+        border-radius: 34px;
+        transition: background-color .3s;
+        cursor: pointer;
+    }
+    .toggle-label::after {
+        content: '';
+        position: absolute;
+        width: 27px;
+        height: 27px;
+        border-radius: 50%;
+        background-color: white;
+        top: 2px;
+        left: 2px;
+        transition: transform .3s;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .ios-toggle:checked + .toggle-label { background-color: var(--accent); }
+    .ios-toggle:checked + .toggle-label::after { transform: translateX(20px); }
+
     @media (max-width: 980px){
       .grid{grid-template-columns:1fr}
       .checklist{grid-template-columns:1fr}
@@ -72,9 +155,9 @@
 <body>
 <header>
   <div class="wrap row" style="align-items:center;">
-    <h1>PagePulse SEO <span class="sub">— On-Page Inspector (Single HTML)</span></h1>
+    <h1>PagePulse SEO <span class="sub">— On-Page Inspector</span></h1>
     <div class="lang row" style="align-items:flex-end; gap:8px">
-      <label for="uiLang" class="small" data-i="language_label">UI 언어 / Language</label>
+      <label for="uiLang" data-i="language_label" style="margin:0; text-transform:none; font-size:.8rem;">UI Language</label>
       <select id="uiLang">
         <option value="ko">한국어</option>
         <option value="en">English</option>
@@ -91,48 +174,51 @@
     <section class="card" style="grid-column: span 7;">
       <h2 data-i="content_input">Content Input</h2>
       <div>
-        <label data-i="focus_keyword">포커스 키워드 (Focus Keyword)</label>
-        <input id="focus" placeholder="예: 2025년 민생소비쿠폰 주말신청" />
+        <label data-i="focus_keyword">Focus Keyword</label>
+        <input id="focus" placeholder="" />
       </div>
       <div class="grid-2">
         <div>
-          <label data-i="site_domain">사이트 도메인 (내부링크 판별)</label>
-          <input id="domain" placeholder="예: onnuriinfo.com" />
+          <label data-i="site_domain">Site Domain</label>
+          <input id="domain" placeholder="" />
+        </div>
+        <div>
+          <label data-i="prev_keywords">Previously Used Keywords</label>
+          <input id="usedKeywords" placeholder="" />
         </div>
       </div>
-      <label data-i="seo_title">SEO 제목</label>
-      <input id="title" placeholder="제목을 입력하세요" />
-      <div class="row" style="margin-top:6px">
+      <label data-i="seo_title">SEO Title</label>
+              <input id="title" placeholder="" />
+      <div class="row" style="margin-top:8px">
         <button class="btn" id="suggestTitle">🔮 <span data-i="suggest_title">제목 개선</span></button>
         <span class="tag" id="titleLen">0 chars</span>
       </div>
-      <label data-i="meta_desc">메타 설명</label>
-      <textarea id="desc" placeholder="검색결과에 보일 설명을 입력하세요 (권장 100~160자)"></textarea>
-      <div class="row" style="margin-top:6px">
+      <label data-i="meta_desc">Meta Description</label>
+              <textarea id="desc" placeholder=""></textarea>
+      <div class="row" style="margin-top:8px">
         <span class="tag" id="descLen">0 chars</span>
       </div>
-      <div class="grid-2">
-        <div>
-          <label data-i="url_slug">URL 슬러그</label>
-          <input id="slug" placeholder="예: weekend-application-guide-2025" />
-        </div>
-        <div>
-          <label data-i="prev_keywords">이전에 사용한 키워드 (쉼표로 구분)</label>
-          <input id="usedKeywords" placeholder="예: 민생소비쿠폰, 최저임금 2025" />
-        </div>
+      <label data-i="url_slug">URL Slug</label>
+              <input id="slug" placeholder="" />
+      
+      <div class="toggle-switch-container">
+        <input type="checkbox" id="pillar" class="ios-toggle" />
+        <label for="pillar" class="toggle-label"></label>
+        <span data-i="pillar">이 게시물은 Pillar Content입니다</span>
       </div>
-      <div class="row" style="margin:8px 0 4px">
-        <label class="pill"><input type="checkbox" id="pillar" /> <span data-i="pillar">이 게시물은 Pillar Content입니다</span></label>
-        <button class="btn" id="makeSlug">🔧 <span data-i="make_slug">제목으로 슬러그 자동 생성</span></button>
-        <button class="btn" id="addToc">🧭 <span data-i="insert_toc">[toc] 삽입</span></button>
-      </div>
-      <label data-i="main_content">본문 (Markdown 또는 HTML 가능)</label>
-      <textarea id="content" placeholder="여기에 콘텐츠를 붙여넣으세요. 이미지, 링크, 제목(H2/H3), [toc] 등을 포함하면 자동 감지합니다."></textarea>
-      <div class="row" style="margin-top:8px">
-        <button class="btn primary" id="analyze">✅ <span data-i="run_check">체크 실행 / 실시간 분석</span></button>
-        <button class="btn" id="copyReport">📋 <span data-i="copy_report">리포트 복사</span></button>
-        <button class="btn" id="downloadMd">⬇️ <span data-i="download_md">Markdown 저장</span></button>
-        <span class="tag">PagePulse SEO v1.1 · 단일 HTML · 오프라인</span>
+      
+      <label data-i="main_content">Main Content (HTML or Markdown)</label>
+              <textarea id="content" placeholder=""></textarea>
+      <div class="row" style="margin-top:16px; justify-content:space-between;">
+        <div class="row">
+            <button class="btn primary" id="analyze">✅ <span data-i="run_check">실시간 분석</span></button>
+            <button class="btn" id="copyReport">📋 <span data-i="copy_report">리포트 복사</span></button>
+            <button class="btn" id="downloadMd">⬇️ <span data-i="download_md">Markdown 저장</span></button>
+        </div>
+        <div class="row">
+            <button class="btn" id="makeSlug">🔧 <span data-i="make_slug">슬러그 생성</span></button>
+            <button class="btn" id="addToc">🧭 <span data-i="insert_toc">[toc] 삽입</span></button>
+        </div>
       </div>
     </section>
 
@@ -142,57 +228,32 @@
         <div class="score" id="score">0</div>
         <div style="flex:1">
           <div class="progress"><div class="bar" id="bar" style="width:0%"></div></div>
-          <div class="small" id="gradeNote" style="margin-top:6px">—</div>
+          <div class="small" id="gradeNote" style="margin-top:8px">—</div>
         </div>
-        <div class="tag" id="grade">–</div>
       </div>
-      <div class="kpi" style="margin-top:12px">
+      <div class="kpi" style="margin-top:20px">
         <div>
           <div class="small" data-i="kpi_words">단어 수</div>
           <div class="value" id="kpiWords">0</div>
-          <div class="small" id="kpiWordHint">600–2500 권장</div>
         </div>
         <div>
           <div class="small" data-i="kpi_density">키워드 밀도</div>
           <div class="value" id="kpiDensity">0%</div>
-          <div class="small">권장 0.8%–1.2%</div>
         </div>
         <div>
-          <div class="small" data-i="kpi_images">이미지 수</div>
+          <div class="small" data-i="kpi_images">이미지</div>
           <div class="value" id="kpiImages">0</div>
-          <div class="small" id="kpiAlt">ALT에 키워드 0개</div>
         </div>
         <div>
-          <div class="small" data-i="kpi_links">링크(내부/외부)</div>
+          <div class="small" data-i="kpi_links">링크</div>
           <div class="value" id="kpiLinks">0 / 0</div>
-          <div class="small" id="kpiFollow">DoFollow 외부 0개</div>
         </div>
-      </div>
-      <div style="margin-top:14px">
-        <details>
-          <summary>🔍 <b data-i="details">세부 지표 / Details</b></summary>
-          <div class="small mono" id="rawStats" style="margin-top:8px;white-space:pre-wrap"></div>
-        </details>
       </div>
     </section>
 
     <section class="card" style="grid-column: span 12;">
       <h2 data-i="checklist">Checklist</h2>
       <div class="checklist" id="checklist"></div>
-      <div class="footer">Tip: 본 도구는 콘텐츠를 로컬에서만 처리합니다. 인터넷 연결 및 외부 라이브러리 없이 동작합니다.</div>
-    </section>
-
-    <section class="card" style="grid-column: span 12;">
-      <h2 data-i="step_by_step">Step-by-Step (가이드)</h2>
-      <ol>
-        <li>포커스 키워드를 정하고 <b>제목/메타/URL/본문</b>에 적절히 배치합니다.</li>
-        <li>본문을 붙여넣고 <b>H2/H3 부제목</b>에 키워드를 1–2회 사용합니다.</li>
-        <li>이미지를 넣고 <b>ALT</b>에 자연스럽게 키워드를 포함합니다.</li>
-        <li><b>[toc]</b> 또는 제목이 많다면 자동 목차를 추가합니다.</li>
-        <li>내부/외부 링크를 최소 1개 이상 포함하고, 외부 링크는 <b>dofollow</b>를 1개 이상 유지합니다.</li>
-        <li>단어 수 600–2500, 키워드 밀도 0.8–1.2% 범위를 맞춥니다.</li>
-        <li>‘리포트 복사’ 또는 ‘Markdown 저장’으로 기록/공유하세요.</li>
-      </ol>
     </section>
   </div>
 </main>
@@ -200,70 +261,27 @@
 <script>
 // ====== i18n (간단 사전) ======
 const I18N = {
-  ko:{content_input:"콘텐츠 입력", focus_keyword:"포커스 키워드 (Focus Keyword)", site_domain:"사이트 도메인 (내부링크 판별)", seo_title:"SEO 제목", suggest_title:"제목 개선", meta_desc:"메타 설명", url_slug:"URL 슬러그", prev_keywords:"이전에 사용한 키워드 (쉼표로 구분)", pillar:"이 게시물은 Pillar Content입니다", make_slug:"제목으로 슬러그 자동 생성", insert_toc:"[toc] 삽입", main_content:"본문 (Markdown 또는 HTML 가능)", run_check:"체크 실행 / 실시간 분석", copy_report:"리포트 복사", download_md:"Markdown 저장", kpi_words:"단어 수", kpi_density:"키워드 밀도", kpi_images:"이미지 수", kpi_links:"링크(내부/외부)",
-      score:"점수", checklist:"체크리스트", step_by_step:"단계별 가이드", details:"세부 지표 / Details", language_label:"UI 언어 / Language", schema_panel:"리치 결과 & 스키마", og_panel:"OG/Twitter 메타 생성기", eeat_panel:"E‑E‑A‑T 체크리스트", copy_meta:"메타 태그 복사",
-      // placeholders
-      ph_focus:"예: 2025년 민생소비쿠폰 주말신청",
-      ph_domain:"예: onnuriinfo.com",
-      ph_title:"제목을 입력하세요",
-      ph_desc:"검색결과에 보일 설명을 입력하세요 (권장 100~160자)",
-      ph_slug:"예: weekend-application-guide-2025",
-      ph_used:"예: 민생소비쿠폰, 최저임금 2025",
-      ph_content:"여기에 콘텐츠를 붙여넣으세요. 이미지, 링크, 제목(H2/H3), [toc] 등을 포함하면 자동 감지합니다."},
-  en:{content_input:"Content Input", focus_keyword:"Focus Keyword", site_domain:"Site Domain (internal link check)", seo_title:"SEO Title", suggest_title:"Improve Title", meta_desc:"Meta Description", url_slug:"URL Slug", prev_keywords:"Previously used keywords (comma-separated)", pillar:"This post is Pillar Content", make_slug:"Slugify from title", insert_toc:"Insert [toc]", main_content:"Body (Markdown or HTML)", run_check:"Run Check / Live Analyze", copy_report:"Copy Report", download_md:"Save Markdown", kpi_words:"Word Count", kpi_density:"Keyword Density", kpi_images:"Images", kpi_links:"Links (internal/external)",
-      score:"Score", checklist:"Checklist", step_by_step:"Step-by-Step (Guide)", details:"Details", language_label:"UI Language", schema_panel:"Rich Results & Schema", og_panel:"OG/Twitter Meta Generator", eeat_panel:"E‑E‑A‑T Checklist", copy_meta:"Copy meta tags",
-      ph_focus:"e.g., weekend voucher application 2025",
-      ph_domain:"e.g., example.com",
-      ph_title:"Enter a title",
-      ph_desc:"Write a snippet for search (100–160 chars recommended)",
-      ph_slug:"e.g., weekend-application-guide-2025",
-      ph_used:"e.g., living coupon, minimum wage 2025",
-      ph_content:"Paste content here. Include images, links, H2/H3, and [toc]."},
-  ja:{content_input:"コンテンツ入力", focus_keyword:"フォーカスキーワード", site_domain:"サイトドメイン (内部リンク判定)", seo_title:"SEOタイトル", suggest_title:"タイトル改善", meta_desc:"メタディスクリプション", url_slug:"URLスラッグ", prev_keywords:"過去に使用したキーワード", pillar:"この投稿はピラーコンテンツ", make_slug:"タイトルからスラッグ生成", insert_toc:"[toc] 挿入", main_content:"本文 (Markdown / HTML)", run_check:"チェック実行 / ライブ分析", copy_report:"レポートをコピー", download_md:"Markdown 保存", kpi_words:"単語数", kpi_density:"キーワード密度", kpi_images:"画像数", kpi_links:"リンク(内部/外部)",
-      score:"スコア", checklist:"チェックリスト", step_by_step:"ステップ・バイ・ステップ（ガイド）", details:"詳細指標 / Details", language_label:"UI 言語 / Language", schema_panel:"リッチリザルト & スキーマ", og_panel:"OG/Twitter メタ生成", eeat_panel:"E‑E‑A‑T チェックリスト", copy_meta:"メタタグをコピー",
-      ph_focus:"例：週末申請 バウチャー 2025",
-      ph_domain:"例：example.com",
-      ph_title:"タイトルを入力してください",
-      ph_desc:"検索結果に表示される説明（推奨100～160文字）",
-      ph_slug:"例：weekend-application-guide-2025",
-      ph_used:"例：バウチャー, 最低賃金 2025",
-      ph_content:"ここに本文を貼り付けてください。画像・リンク・H2/H3・[toc] など。"},
-  zh:{content_input:"内容输入", focus_keyword:"焦点关键词", site_domain:"站点域名(内部链接判断)", seo_title:"SEO 标题", suggest_title:"优化标题", meta_desc:"元描述", url_slug:"URL 别名", prev_keywords:"以往用过的关键词", pillar:"此文为支柱内容", make_slug:"根据标题生成别名", insert_toc:"插入 [toc]", main_content:"正文 (Markdown 或 HTML)", run_check:"执行检查 / 实时分析", copy_report:"复制报告", download_md:"保存 Markdown", kpi_words:"字数", kpi_density:"关键词密度", kpi_images:"图片数", kpi_links:"链接(内部/外部)",
-      score:"分数", checklist:"检查清单", step_by_step:"步骤指南", details:"详细指标 / 详情", language_label:"界面语言 / Language", schema_panel:"富结果与 Schema", og_panel:"OG/Twitter 元标签生成器", eeat_panel:"E‑E‑A‑T 检查清单", copy_meta:"复制元标签",
-      ph_focus:"例如：周末申请 消费券 2025",
-      ph_domain:"例如：example.com",
-      ph_title:"请输入标题",
-      ph_desc:"展示在搜索结果中的描述（建议100–160字）",
-      ph_slug:"例如：weekend-application-guide-2025",
-      ph_used:"例如：消费券, 2025最低工资",
-      ph_content:"在此粘贴内容。可包含图片、链接、H2/H3，以及 [toc]。"},
-  es:{content_input:"Entrada de contenido", focus_keyword:"Palabra clave principal", site_domain:"Dominio del sitio (enlaces internos)", seo_title:"Título SEO", suggest_title:"Mejorar título", meta_desc:"Meta descripción", url_slug:"Slug de URL", prev_keywords:"Palabras clave usadas antes", pillar:"Este artículo es Pilar", make_slug:"Slug desde título", insert_toc:"Insertar [toc]", main_content:"Cuerpo (Markdown/HTML)", run_check:"Ejecutar revisión / Análisis en vivo", copy_report:"Copiar informe", download_md:"Guardar Markdown", kpi_words:"Cantidad de palabras", kpi_density:"Densidad de palabra clave", kpi_images:"Imágenes", kpi_links:"Enlaces (internos/externos)",
-      score:"Puntuación", checklist:"Lista de verificación", step_by_step:"Paso a paso (guía)", details:"Indicadores / Detalles", language_label:"Idioma de la UI", schema_panel:"Resultados enriquecidos y Schema", og_panel:"Generador de metadatos OG/Twitter", eeat_panel:"Lista E‑E‑A‑T", copy_meta:"Copiar etiquetas meta",
-      ph_focus:"p. ej., solicitud de cupón de fin de semana 2025",
-      ph_domain:"p. ej., ejemplo.com",
-      ph_title:"Introduce un título",
-      ph_desc:"Descripción para el snippet (recomendado 100–160 caracteres)",
-      ph_slug:"p. ej., weekend-application-guide-2025",
-      ph_used:"p. ej., cupón, salario mínimo 2025",
-      ph_content:"Pega tu contenido aquí. Incluye imágenes, enlaces, H2/H3 y [toc]."}
+  ko:{content_input:"콘텐츠 입력", focus_keyword:"포커스 키워드", site_domain:"사이트 도메인", seo_title:"SEO 제목", suggest_title:"제목 개선", meta_desc:"메타 설명", url_slug:"URL 슬러그", prev_keywords:"이전에 사용한 키워드", pillar:"이 게시물은 Pillar Content입니다", make_slug:"슬러그 생성", insert_toc:"[toc] 삽입", main_content:"본문 (HTML/Markdown)", run_check:"실시간 분석", copy_report:"리포트 복사", download_md:"Markdown 저장", kpi_words:"단어 수", kpi_density:"키워드 밀도", kpi_images:"이미지", kpi_links:"링크",
+      score:"점수", checklist:"체크리스트", step_by_step:"단계별 가이드", details:"세부 지표", language_label:"UI 언어", schema_panel:"리치 결과 & 스키마", og_panel:"OG/Twitter 메타 생성기", eeat_panel:"E‑E‑A‑T 체크리스트", copy_meta:"메타 태그 복사"},
+  en:{content_input:"Content Input", focus_keyword:"Focus Keyword", site_domain:"Site Domain", seo_title:"SEO Title", suggest_title:"Improve Title", meta_desc:"Meta Description", url_slug:"URL Slug", prev_keywords:"Previously Used Keywords", pillar:"This post is Pillar Content", make_slug:"Make Slug", insert_toc:"Insert [toc]", main_content:"Main Content (HTML/Markdown)", run_check:"Live Analyze", copy_report:"Copy Report", download_md:"Save Markdown", kpi_words:"Word Count", kpi_density:"Keyword Density", kpi_images:"Images", kpi_links:"Links",
+      score:"Score", checklist:"Checklist", step_by_step:"Step-by-Step (Guide)", details:"Details", language_label:"UI Language", schema_panel:"Rich Results & Schema", og_panel:"OG/Twitter Meta Generator", eeat_panel:"E‑E‑A‑T Checklist", copy_meta:"Copy meta tags"},
+  ja:{content_input:"コンテンツ入力", focus_keyword:"フォーカスキーワード", site_domain:"サイトドメイン", seo_title:"SEOタイトル", suggest_title:"タイトル改善", meta_desc:"メタディスクリプション", url_slug:"URLスラッグ", prev_keywords:"過去に使用したキーワード", pillar:"この投稿はピラーコンテンツ", make_slug:"スラッグ生成", insert_toc:"[toc] 挿入", main_content:"本文 (Markdown / HTML)", run_check:"ライブ分析", copy_report:"レポートをコピー", download_md:"Markdown 保存", kpi_words:"単語数", kpi_density:"キーワード密度", kpi_images:"画像", kpi_links:"リンク",
+      score:"スコア", checklist:"チェックリスト", language_label:"UI 言語"},
+  zh:{content_input:"内容输入", focus_keyword:"焦点关键词", site_domain:"站点域名", seo_title:"SEO 标题", suggest_title:"优化标题", meta_desc:"元描述", url_slug:"URL 别名", prev_keywords:"以往用过的关键词", pillar:"此文为支柱内容", make_slug:"生成别名", insert_toc:"插入 [toc]", main_content:"正文 (Markdown/HTML)", run_check:"实时分析", copy_report:"复制报告", download_md:"保存 Markdown", kpi_words:"字数", kpi_density:"关键词密度", kpi_images:"图片", kpi_links:"链接",
+      score:"分数", checklist:"检查清单", language_label:"界面语言"},
+  es:{content_input:"Entrada de contenido", focus_keyword:"Palabra clave principal", site_domain:"Dominio del sitio", seo_title:"Título SEO", suggest_title:"Mejorar título", meta_desc:"Meta descripción", url_slug:"Slug de URL", prev_keywords:"Palabras clave usadas antes", pillar:"Este artículo es Pilar", make_slug:"Crear Slug", insert_toc:"Insertar [toc]", main_content:"Cuerpo (Markdown/HTML)", run_check:"Análisis en vivo", copy_report:"Copiar informe", download_md:"Guardar Markdown", kpi_words:"Nº de palabras", kpi_density:"Densidad", kpi_images:"Imágenes", kpi_links:"Enlaces",
+      score:"Puntuación", checklist:"Lista de verificación", language_label:"Idioma"}
 };
 const $ = s=>document.querySelector(s);
 const $$ = s=>Array.from(document.querySelectorAll(s));
 function setLang(lang){
   const dict = I18N[lang]||I18N.ko;
   window.PP_LANG = lang;
-  // 텍스트 노드 번역
   $$('[data-i]').forEach(el=>{
     const k=el.getAttribute('data-i');
     if(dict[k]) el.textContent=dict[k]
   });
-  // placeholder 번역 (입력/텍스트영역)
-  const pmap = { focus:'ph_focus', domain:'ph_domain', title:'ph_title', desc:'ph_desc', slug:'ph_slug', usedKeywords:'ph_used', content:'ph_content' };
-  Object.entries(pmap).forEach(([id,key])=>{
-    const el=document.getElementById(id);
-    if(el && dict[key]) el.setAttribute('placeholder', dict[key]);
-  });
-  if(window._applyExtLang) window._applyExtLang();
+
 }
 $('#uiLang').addEventListener('change',e=>setLang(e.target.value));
 setLang('ko');
@@ -289,25 +307,21 @@ const inFirstTenPercent = (text, kw)=>{
 }
 function parseImages(content){
   const html = content; const imgs=[];
-  // HTML <img alt="...">
   for(const m of html.matchAll(/<img[^>]*alt\s*=\s*"([^"]*)"[^>]*>/gi)){ imgs.push({alt:m[1]}) }
-  // Markdown ![alt](src)
   for(const m of html.matchAll(/!\[([^\]]*)\]\(([^\)]+)\)/g)){ imgs.push({alt:m[1]}) }
   return imgs;
 }
 function parseLinks(content){
   const links=[]; const d=$('#domain').value.trim();
-  // HTML <a href>
   for(const m of content.matchAll(/<a[^>]*href\s*=\s*"([^"]+)"[^>]*?(rel\s*=\s*"([^"]*)")?[^>]*>/gi)){
     const href = m[1]; const rel = (m[3]||'').toLowerCase(); const isExternal = /^https?:\/\//i.test(href) && (!d || !href.includes(d));
     const isInternal = d? href.includes(d) || /^\//.test(href) : !/^https?:\/\//i.test(href) || /^\//.test(href);
     links.push({href, isExternal, isInternal, dofollow: isExternal && !/nofollow/.test(rel)})
   }
-  // Markdown [text](url)
   for(const m of content.matchAll(/\[[^\]]*\]\(([^\)]+)\)/g)){
     const href=m[1]; const isExternal = /^https?:\/\//i.test(href) && (!d || !href.includes(d));
     const isInternal = d? href.includes(d) || /^\//.test(href) : !/^https?:\/\//i.test(href) || /^\//.test(href);
-    links.push({href, isExternal, isInternal, dofollow:isExternal}) // markdown은 rel 정보 부재 가정
+    links.push({href, isExternal, isInternal, dofollow:isExternal})
   }
   return links;
 }
@@ -320,7 +334,6 @@ function parseHeadings(content){
 function hasTOC(content){ return /\[toc\]/i.test(content) || /<nav[^>]*class\s*=\s*"[^"]*toc[^"]*"/i.test(content) }
 function hasMedia(content){ return /<img|!\[|<video|<iframe/i.test(content) }
 
-// ====== Analyzer ======
 function analyze(){
   const focus=$('#focus').value.trim();
   const title=$('#title').value||'';
@@ -329,6 +342,36 @@ function analyze(){
   const used = ($('#usedKeywords').value||'').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean);
   const pillar = $('#pillar').checked;
   const content = $('#content').value||'';
+  
+  // 포커스 키워드가 없으면 모든 체크를 실패로 처리
+  if(!focus) {
+    const list = $('#checklist'); 
+    list.innerHTML='';
+    $('#score').textContent = '0';
+    $('#bar').style.width = '0%';
+    $('#gradeNote').textContent = '포커스 키워드를 입력하세요';
+    $('#kpiWords').textContent = '0';
+    $('#kpiDensity').textContent = '0%';
+    $('#kpiImages').textContent = '0';
+    $('#kpiLinks').textContent = '0 / 0';
+    $('#titleLen').textContent = '0 chars';
+    $('#descLen').textContent = '0 chars';
+    
+    return {
+      pct: 0,
+      grade: 'F',
+      checks: [],
+      raw: {
+        wordCount: 0,
+        keywordOccurrences: 0,
+        keywordDensity: 0,
+        titleHasKw: false,
+        descHasKw: false,
+        urlHasKw: false,
+        keywordInFirst10pct: false
+      }
+    };
+  }
 
   const text = stripHtml(content);
   const wc = wordCount(content);
@@ -355,32 +398,28 @@ function analyze(){
   const usedBefore = used.includes(focus.toLowerCase());
   const altHasKw = imgKw>0;
 
-  // Scoring (100점 만점)
   let score=0; const checks=[]; const add=(ok,label,hint='')=>{checks.push({ok,label,hint})}
-  // 가중치 설계
-  // 제목/설명/URL/초반노출/부제목/ALT/링크/단어수/밀도/TOC/미디어
-  if(titleHasKw){score+=10; add(true,'SEO 제목에 포커스 키워드 포함','키워드는 제목 앞쪽에 배치하면 더 좋습니다.')} else add(false,'SEO 제목에 포커스 키워드 없음','제목에 정확한 키워드를 1회 포함하세요.');
-  if(titleStartsKw){score+=5; add(true,'SEO 제목의 앞쪽에 키워드','가능하다면 키워드로 시작하세요.')} else add(null,'SEO 제목의 앞쪽에 키워드 아님','가능하면 제목을 키워드로 시작해보세요.');
-  if(titleHasNum){score+=3; add(true,'SEO 제목에 숫자 포함','리스트/연도/수치 등은 CTR에 유리합니다.')} else add(null,'SEO 제목에 숫자 없음','숫자를 1개 포함하면 클릭률 향상에 도움.');
-  if(descHasKw){score+=8; add(true,'메타 설명에 키워드 포함',`현재 ${descLen}자 (권장 100–160자).`)} else add(false,'메타 설명에 키워드 없음','요약문에도 키워드를 1회 포함하세요.');
-  if(descLen>=100 && descLen<=160){score+=4; add(true,'메타 설명 길이 적정',`${descLen}자`)} else add(null,'메타 설명 길이 부적정',`${descLen}자 (권장 100–160자)`);
-  if(urlHasKw){score+=5; add(true,'URL에 키워드 포함','슬러그는 짧고 명확하게.')} else add(false,'URL에 키워드 없음','슬러그에 키워드를 포함하세요.');
-  if(slug.length>0 && slug.length<=60){score+=2; add(true,'URL 길이 적정',`${slug.length}자`)} else add(null,'URL 길이 확인',`${slug.length}자 (권장 ≤60자)`);
-  if(first10){score+=6; add(true,'본문 처음 10% 이내 키워드 노출','초반 배치는 검색엔진 이해에 유리.') } else add(false,'본문 초반 키워드 미노출','도입부 2~3문장 안에 키워드를 1회 포함.');
-  if(kOcc>0){score+=6; add(true,'본문에 키워드 존재',`${kOcc}회`)} else add(false,'본문에 키워드 없음','본문에 최소 1회 포함하세요.');
-  if(hKw>0){score+=6; add(true,'부제목(H2/H3)에 키워드 포함',`${hKw}개 부제목에 포함`)} else add(false,'부제목에 키워드 없음','H2/H3에 1–2회 자연스럽게 포함.');
-  if(altHasKw){score+=4; add(true,'이미지 ALT에 키워드 포함',`${imgKw}개 ALT에 포함`)} else add(null,'이미지 ALT에 키워드 없음','주요 이미지 ALT에 1회 포함.');
-  if(intLinks>0){score+=4; add(true,'내부 링크 포함',`${intLinks}개`)} else add(false,'내부 링크 없음','관련 글로 최소 1개 연결.');
-  if(extLinks>0){score+=4; add(true,'외부 링크 포함',`${extLinks}개`)} else add(false,'외부 링크 없음','신뢰할 수 있는 자료 1개 이상 연결.');
-  if(doFollowExt>0){score+=2; add(true,'DoFollow 외부 링크 포함',`${doFollowExt}개`)} else add(null,'DoFollow 외부 링크 없음','최소 1개는 dofollow 유지.');
-  if(wc>=600 && wc<=2500){score+=10; add(true,'본문 길이 적정',`${wc} 단어`)} else add(false,'본문 길이 범위 밖',`${wc} 단어 (권장 600–2500)`);
-  if(density>=0.8 && density<=1.2){score+=10; add(true,'키워드 밀도 적정',`${density.toFixed(2)}%`)} else add(false,'키워드 밀도 부적정',`${density.toFixed(2)}% (권장 0.8–1.2%)`);
-  if(toc){score+=4; add(true,'목차(ToC) 감지','[toc] 또는 TOC 블록 존재')} else add(null,'목차(ToC) 없음','긴 글이면 [toc]를 추가.');
-  if(media){score+=3; add(true,'이미지/비디오 포함','멀티미디어는 체류시간에 도움.')} else add(null,'이미지/비디오 없음','미디어 1개 이상 추가 권장.');
-  if(pillar){score+=2; add(true,'Pillar Content 플래그','핵심 페이지로 설정됨')} else add(null,'Pillar Content 아님','핵심 허브라면 체크.');
-  if(!usedBefore){score+=2; add(true,'이 포커스 키워드 최초 사용','키워드 중복 최소화')} else add(null,'이전에 사용한 키워드','중복 사용은 피하는 것이 좋습니다.');
+  if(titleHasKw){score+=10; add(true,'SEO 제목에 포커스 키워드 포함','키워드는 제목 앞쪽에 배치하면 더 좋습니다.')} else {score+=0; add(false,'SEO 제목에 포커스 키워드 없음',`수정 제안: "${focus}"를 포함한 제목으로 변경하세요. 예시: "${focus} 완벽 가이드"`);}
+  if(titleStartsKw){score+=5; add(true,'SEO 제목의 앞쪽에 키워드','가능하다면 키워드로 시작하세요.')} else {score+=0; add(false,'SEO 제목의 앞쪽에 키워드 아님',`수정 제안: 제목을 "${focus}"로 시작하세요. 예시: "${focus}: ${title || '완벽 가이드'}"`);}
+  if(titleHasNum){score+=3; add(true,'SEO 제목에 숫자 포함','리스트/연도/수치 등은 CTR에 유리합니다.')} else {score+=0; add(false,'SEO 제목에 숫자 없음',`수정 제안: 제목에 숫자를 추가하세요. 예시: "${title || focus} 10가지 팁" 또는 "${title || focus} 2025년 가이드"`);}
+  if(descHasKw){score+=8; add(true,'메타 설명에 키워드 포함',`현재 ${descLen}자 (권장 100–160자).`)} else {score+=0; add(false,'메타 설명에 키워드 없음',`수정 제안: 메타 설명에 "${focus}"를 포함하세요. 예시: "${focus}에 대한 상세한 정보와 실용적인 팁을 제공합니다. ${desc || '이 글을 통해 전문적인 지식을 얻으세요.'}"`);}
+  if(descLen>=100 && descLen<=160){score+=4; add(true,'메타 설명 길이 적정',`${descLen}자`)} else {score+=0; add(false,'메타 설명 길이 부적정',`${descLen}자 (권장 100–160자)`);}
+  if(urlHasKw){score+=5; add(true,'URL에 키워드 포함','슬러그는 짧고 명확하게.')} else {score+=0; add(false,'URL에 키워드 없음',`수정 제안: URL 슬러그에 "${focus}"를 포함하세요. 예시: "${focus}-guide" 또는 "${focus}-tips"`);}
+  if(slug.length>0 && slug.length<=60){score+=2; add(true,'URL 길이 적정',`${slug.length}자`)} else {score+=0; add(false,'URL 길이 확인',`${slug.length}자 (권장 ≤60자)`);}
+  if(first10){score+=6; add(true,'본문 처음 10% 이내 키워드 노출','초반 배치는 검색엔진 이해에 유리.') } else {score+=0; add(false,'본문 초반 키워드 미노출','도입부 2~3문장 안에 키워드를 1회 포함.');}
+  if(kOcc>0){score+=6; add(true,'본문에 키워드 존재',`${kOcc}회`)} else {score+=0; add(false,'본문에 키워드 없음','본문에 최소 1회 포함하세요.');}
+  if(hKw>0){score+=6; add(true,'부제목(H2/H3)에 키워드 포함',`${hKw}개 부제목에 포함`)} else {score+=0; add(false,'부제목에 키워드 없음','H2/H3에 1–2회 자연스럽게 포함.');}
+  if(altHasKw){score+=4; add(true,'이미지 ALT에 키워드 포함',`${imgKw}개 ALT에 포함`)} else {score+=0; add(false,'이미지 ALT에 키워드 없음','주요 이미지 ALT에 1회 포함.');}
+  if(intLinks>0){score+=4; add(true,'내부 링크 포함',`${intLinks}개`)} else {score+=0; add(false,'내부 링크 없음','관련 글로 최소 1개 연결.');}
+  if(extLinks>0){score+=4; add(true,'외부 링크 포함',`${extLinks}개`)} else {score+=0; add(false,'외부 링크 없음','신뢰할 수 있는 자료 1개 이상 연결.');}
+  if(doFollowExt>0){score+=2; add(true,'DoFollow 외부 링크 포함',`${doFollowExt}개`)} else {score+=0; add(false,'DoFollow 외부 링크 없음','최소 1개는 dofollow 유지.');}
+  if(wc>=600 && wc<=2500){score+=10; add(true,'본문 길이 적정',`${wc} 단어`)} else {score+=0; add(false,'본문 길이 범위 밖',`${wc} 단어 (권장 600–2500)`);}
+  if(density>=0.8 && density<=1.2){score+=10; add(true,'키워드 밀도 적정',`${density.toFixed(2)}%`)} else {score+=0; add(false,'키워드 밀도 부적정',`${density.toFixed(2)}% (권장 0.8–1.2%)`);}
+  if(toc){score+=4; add(true,'목차(ToC) 감지','[toc] 또는 TOC 블록 존재')} else {score+=0; add(false,'목차(ToC) 없음','긴 글이면 [toc]를 추가.');}
+  if(media){score+=3; add(true,'이미지/비디오 포함','멀티미디어는 체류시간에 도움.')} else {score+=0; add(false,'이미지/비디오 없음','미디어 1개 이상 추가 권장.');}
+  if(pillar){score+=2; add(true,'Pillar Content 플래그','핵심 페이지로 설정됨')} else {score+=0; add(false,'Pillar Content 아님','핵심 허브라면 체크.');}
+  if(!usedBefore){score+=2; add(true,'이 포커스 키워드 최초 사용','키워드 중복 최소화')} else {score+=0; add(false,'이전에 사용한 키워드','중복 사용은 피하는 것이 좋습니다.');}
 
-  // Grade
   const pct = Math.max(0, Math.min(100, score));
   let grade='C'; let note='개선 여지 있음';
   if(pct>=95){grade='A+'; note='탁월한 최적화'}
@@ -390,42 +429,42 @@ function analyze(){
   else if(pct>=50){grade='D'; note='개선 필요'}
   else {grade='F'; note='근본 개선 필요'}
 
-  // Render KPIs
   $('#score').textContent = Math.round(pct);
   $('#bar').style.width = pct+'%';
-  const gradeEl = $('#grade'); gradeEl.textContent = grade; gradeEl.className = 'tag grade-'+(grade==='A+'?'a-plus':grade.toLowerCase());
   $('#gradeNote').textContent = note;
   $('#kpiWords').textContent = wc.toLocaleString();
   $('#kpiDensity').textContent = density.toFixed(2)+'%';
   $('#kpiImages').textContent = imgs.length;
-  $('#kpiAlt').textContent = `ALT에 키워드 ${imgKw}개`;
   $('#kpiLinks').textContent = `${intLinks} / ${extLinks}`;
-  $('#kpiFollow').textContent = `DoFollow 외부 ${doFollowExt}개`;
   $('#titleLen').textContent = `${titleLen} chars`;
   $('#descLen').textContent = `${descLen} chars`;
 
-  // Render checklist
   const list = $('#checklist'); list.innerHTML='';
   for(const c of checks){
-    const div=document.createElement('div'); div.className='item';
+    const div=document.createElement('div');
     const status = c.ok===true? 'ok' : (c.ok===false? 'fail' : 'warn');
-    div.className = 'item '+status;
+    div.className = 'item';
     div.innerHTML = `<div class="dot ${status}"></div><div><div class="msg">${c.label}</div>${c.hint?`<div class="hint">${c.hint}</div>`:''}</div>`;
     list.appendChild(div);
   }
-
-  // Raw stats
-  const raw = {
-    focus, titleLen, descLen, slugLen: slug.length, wordCount: wc, keywordOccurrences: kOcc, headings: hs.length, headingsWithKeyword: hKw,
-    images: imgs.length, imagesAltWithKeyword: imgKw, internalLinks:intLinks, externalLinks:extLinks, dofollowExternal: doFollowExt,
-    titleHasKw, titleStartsKw, titleHasNum, descHasKw, urlHasKw, keywordInFirst10pct: first10, pillar
+  
+  // 필요한 데이터 반환
+  return {
+    pct,
+    grade,
+    checks,
+    raw: {
+      wordCount: wc,
+      keywordOccurrences: kOcc,
+      keywordDensity: density,
+      titleHasKw,
+      descHasKw,
+      urlHasKw,
+      keywordInFirst10pct: first10
+    }
   };
-  $('#rawStats').textContent = JSON.stringify(raw, null, 2);
-
-  return {pct, grade, checks, raw};
 }
 
-// ====== UI Actions ======
 function analyzeAndPersist(){ const r=analyze(); localStorage.setItem('pagePulseSEODraft', JSON.stringify(getState())); return r }
 function getState(){ return {focus:$('#focus').value,title:$('#title').value,desc:$('#desc').value,slug:$('#slug').value,domain:$('#domain').value,used:$('#usedKeywords').value,pillar:$('#pillar').checked,content:$('#content').value} }
 function setState(s){ if(!s) return; $('#focus').value=s.focus||''; $('#title').value=s.title||''; $('#desc').value=s.desc||''; $('#slug').value=s.slug||''; $('#domain').value=s.domain||''; $('#usedKeywords').value=s.used||''; $('#pillar').checked=!!s.pillar; $('#content').value=s.content||''; }
@@ -438,17 +477,34 @@ $('#analyze').addEventListener('click', analyzeAndPersist);
     el.addEventListener(evt, analyzeAndPersist);
 });
 
-$('#makeSlug').addEventListener('click', ()=>{ const t=$('#title').value; $('#slug').value = slugify(t); analyzeAndPersist() });
+$('#makeSlug').addEventListener('click', ()=>{
+  const title = $('#title').value.trim();
+  const focus = $('#focus').value.trim();
+  
+  if (!title && !focus) {
+    showToast('제목이나 포커스 키워드를 먼저 입력하세요.', 'warn');
+    return;
+  }
+  
+  let slugText = title || focus;
+  if (title && focus && !title.toLowerCase().includes(focus.toLowerCase())) {
+    // 제목에 키워드가 포함되지 않은 경우 키워드를 앞에 추가
+    slugText = `${focus}-${title}`;
+  }
+  
+  $('#slug').value = slugify(slugText);
+  analyzeAndPersist();
+});
 $('#addToc').addEventListener('click', ()=>{ const c=$('#content'); if(!/\[toc\]/i.test(c.value)){ c.value = '[toc]\n\n' + c.value; } analyzeAndPersist() });
 $('#suggestTitle').addEventListener('click', ()=>{
   const k=$('#focus').value.trim(); if(!k){ showToast('포커스 키워드를 먼저 입력하세요.','warn'); return; }
   const base = $('#title').value.trim() || k;
   const year = new Date().getFullYear();
   const ideas = [
-    `${k}: ${year} 완벽 가이드 (체크리스트 포함)`,
-    `${k} — ${year} 최신 업데이트 7가지 핵심 포인트`,
-    `${k} 총정리: 놓치기 쉬운 10가지 체크`,
-    `${k} 쉽게 정리 (초보자용 단계별 가이드)`
+    `${k}: ${year} 완벽 가이드`,
+    `${k} — ${year} 최신 업데이트 7가지`,
+    `${k} 총정리: 10가지 체크리스트`,
+    `${k} 초보자용 단계별 가이드`
   ];
   let best = ideas[0];
   for(const i of ideas){ if(i.length<=60){ best=i; break } }
@@ -456,229 +512,26 @@ $('#suggestTitle').addEventListener('click', ()=>{
 });
 
 $('#copyReport').addEventListener('click', ()=>{
-  const {pct,grade,raw} = analyze();
-  const lines = [
-    `Score: ${Math.round(pct)} (${grade})`,
-    `단어 수: ${raw.wordCount}`,
-    `키워드 출현: ${raw.keywordOccurrences}회, 밀도: ${(raw.keywordOccurrences/raw.wordCount*100||0).toFixed(2)}%`,
-    `제목/설명/URL 키워드: ${raw.titleHasKw?'O':'X'} / ${raw.descHasKw?'O':'X'} / ${raw.urlHasKw?'O':'X'}`,
-    `초반 10% 노출: ${raw.keywordInFirst10pct?'O':'X'}`,
-    `부제목 키워드: ${raw.headingsWithKeyword}개 / ALT 키워드: ${raw.imagesAltWithKeyword}개`,
-    `내부/외부/DoFollow 외부 링크: ${raw.internalLinks}/${raw.externalLinks}/${raw.dofollowExternal}`
-  ];
+  const result = analyze();
+  const lines = [ `Score: ${Math.round(result.pct)} (${result.grade})`, `단어 수: ${result.raw.wordCount}`, `키워드 출현: ${result.raw.keywordOccurrences}회, 밀도: ${(result.raw.keywordOccurrences/result.raw.wordCount*100||0).toFixed(2)}%`, `제목/설명/URL 키워드: ${result.raw.titleHasKw?'O':'X'} / ${result.raw.descHasKw?'O':'X'} / ${result.raw.urlHasKw?'O':'X'}`, `초반 10% 노출: ${result.raw.keywordInFirst10pct?'O':'X'}`];
   const text = lines.join('\n');
-  navigator.clipboard.writeText(text).then(()=>showToast('리포트를 복사했어요 ✅','ok')).catch(()=>{showToast('복사 실패 — 브라우저에서 직접 복사하세요','warn'); console.log(text);});
+  navigator.clipboard.writeText(text).then(()=>showToast('리포트를 복사했어요 ✅','ok')).catch(()=>showToast('복사 실패','warn'));
 });
 
 $('#downloadMd').addEventListener('click', ()=>{
-  const {pct,grade,checks,raw} = analyze();
-  const md = `# PagePulse SEO Report\n\n- Score: **${Math.round(pct)} (${grade})**\n- Words: **${raw.wordCount}**\n- Keyword occurrences: **${raw.keywordOccurrences}** (density ${(raw.keywordOccurrences/raw.wordCount*100||0).toFixed(2)}%)\n- Title/Meta/URL: ${raw.titleHasKw?'✅':'❌'} / ${raw.descHasKw?'✅':'❌'} / ${raw.urlHasKw?'✅':'❌'}\n- First 10%: ${raw.keywordInFirst10pct?'✅':'❌'}\n- H2/H3 with KW: **${raw.headingsWithKeyword}**\n- Images with ALT KW: **${raw.imagesAltWithKeyword}** / Total images: ${raw.images}\n- Internal/External/DoFollow ext: **${raw.internalLinks}/${raw.externalLinks}/${raw.dofollowExternal}**\n\n## Checklist\n${checks.map(c=>`- ${c.ok===true?'✅':c.ok===false?'❌':'⚠️'} ${c.label}${c.hint?` — ${c.hint}`:''}`).join('\n')}\n`;
+  const result = analyze();
+  const md = `# PagePulse SEO Report\n\n- Score: **${Math.round(result.pct)} (${result.grade})**\n\n## Checklist\n${result.checks.map(c=>`- ${c.ok===true?'✅':c.ok===false?'❌':'⚠️'} ${c.label}${c.hint?` — ${c.hint}`:''}`).join('\n')}\n`;
   const blob = new Blob([md], {type:'text/markdown'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='pagepulse-seo-report.md'; a.click(); URL.revokeObjectURL(a.href);
 });
 
-// Restore draft if any
-try{ const saved = JSON.parse(localStorage.getItem('pagePulseSEODraft')||'null'); if(saved){ setState(saved); analyze(); } }catch(e){}
-
-// Starter example
-if(!$('#content').value){
-  $('#focus').value = '민생소비쿠폰 주말신청';
-  $('#title').value = '민생소비쿠폰 주말신청: 2025 완벽 가이드 (체크리스트 포함)';
-  $('#desc').value = '2025년 민생소비쿠폰 주말신청 방법을 단계별로 정리했습니다. 신청 일정, 사용처, 유의사항까지 한 번에 확인하세요.';
-  $('#slug').value = 'weekend-application-guide-2025';
-  $('#domain').value = 'onnuriinfo.com';
-  $('#content').value = '[toc]\n\n## 신청 대상과 일정\n민생소비쿠폰 주말신청은 지역별 일정에 따라 진행되며, **민생소비쿠폰 주말신청** 키워드를 중심으로 정보를 정리합니다. 내부 링크 예시: <a href="/category/government-support">정부 지원 카테고리</a>. 외부 링크 예시: <a href="https://www.gov.kr" rel="noopener">정부24</a>.\n\n## 준비 서류\n신분증, 본인 명의 카드, 신청 가능 지역 확인 자료가 필요합니다. 다음 이미지는 예시입니다. <img src="idcard.png" alt="민생소비쿠폰 주말신청 준비서류 안내">\n\n## 사용처와 유의사항\n전통시장, 소상공인 매장에서 사용할 수 있으며, 일부 대형마트/온라인몰은 제외됩니다.\n';
+try{ 
+  const saved = JSON.parse(localStorage.getItem('pagePulseSEODraft')||'null'); 
+  if(saved){ 
+    setState(saved); 
+  }
   analyze();
-}
-</script>
-
-<!-- ===== v1.1 확장: Schema, OG/Twitter, E‑E‑A‑T ===== -->
-<script>
-(function(){
-  const grid = document.querySelector('main .grid');
-  if(!grid) return;
-
-  function makeCard(title){
-    const sec=document.createElement('section');
-    sec.className='card';
-    sec.innerHTML=`<h2>${title}</h2><div class="small" style="margin-bottom:8px; color:var(--muted)"></div><div class="content"></div>`;
-    return sec;
-  }
-  const schemaCard = makeCard('');
-  const ogCard = makeCard('');
-  const eeatCard = makeCard('');
-  schemaCard.style.gridColumn='span 12';
-  ogCard.style.gridColumn='span 6';
-  eeatCard.style.gridColumn='span 6';
-  if(!document.querySelector('#_schemaCard_')){
-    schemaCard.id='_schemaCard_'; ogCard.id='_ogCard_'; eeatCard.id='_eeatCard_';
-    grid.appendChild(schemaCard); grid.appendChild(ogCard); grid.appendChild(eeatCard);
-  }
-  function getDict(){ const lang = window.PP_LANG || 'ko'; return (window.I18N && I18N[lang])? I18N[lang] : I18N.ko; }
-  function _applyExtLang(){
-    const d = getDict();
-    const sH2 = document.querySelector('#_schemaCard_ h2'); if(sH2){ sH2.textContent = d.schema_panel || 'Rich Results & Schema'; sH2.setAttribute('data-i','schema_panel'); }
-    const oH2 = document.querySelector('#_ogCard_ h2'); if(oH2){ oH2.textContent = d.og_panel || 'OG/Twitter Meta Generator'; oH2.setAttribute('data-i','og_panel'); }
-    const eH2 = document.querySelector('#_eeatCard_ h2'); if(eH2){ eH2.textContent = d.eeat_panel || 'E‑E‑A‑T Checklist'; eH2.setAttribute('data-i','eeat_panel'); }
-    const copyBtn = document.querySelector('#_ogCard_ .btn'); if(copyBtn){ copyBtn.textContent = d.copy_meta || 'Copy meta tags'; }
-  }
-  window._applyExtLang = _applyExtLang;
-  const uiLangEl = document.querySelector('#uiLang'); if(uiLangEl){ uiLangEl.addEventListener('change', _applyExtLang) }
-  _applyExtLang();
-
-  const getVal = id=> (document.querySelector('#'+id)||{}).value||'';
-  const domainFromState = ()=> getVal('domain').trim();
-  const slugFromState = ()=> getVal('slug').trim();
-
-  const RULES = {
-    FAQPage: { required:['mainEntity'], nested:{ Question:['name','acceptedAnswer'], Answer:['text'] } },
-    HowTo: { required:['name','step'] },
-    Article: { required:['headline','datePublished'], recommended:['author','image'] },
-    Product: { required:['name','offers'], recommended:['sku','brand'] },
-    VideoObject: { required:['name','thumbnailUrl'], alt:['contentUrl','embedUrl','uploadDate'] },
-    BreadcrumbList: { required:['itemListElement'] }
-  };
-
-  function safeJSON(s){ try{ return JSON.parse(s) }catch(e){ return null } }
-  function extractJsonLd(html){
-    const out=[]; const re=/<script[^>]+type=\"application\/ld\+json\"[^>]*>([\s\S]*?)<\/script>/gi; let m;
-    while((m=re.exec(html))) { const j=safeJSON(m[1]); if(!j) continue; const list=Array.isArray(j)?j:[j]; list.forEach(x=>out.push(x)); }
-    return out;
-  }
-  function detectMicrodata(html){
-    const hints=[]; const re=/(itemscope)(?=[^>]*itemtype=\"([^\"]+)\")/gi; let m; while((m=re.exec(html))){ hints.push(m[2]) } return hints;
-  }
-  function typeOf(ent){ const t=ent['@type']; if(!t) return null; return Array.isArray(t)?t[0]:t }
-  function hasAll(ent, arr){ return (arr||[]).every(k=> ent[k]!==undefined) }
-  function validateEntity(ent){
-    const t=typeOf(ent); if(!t || !RULES[t]) return null; const rule=RULES[t];
-    const missing=[]; if(rule.required && !hasAll(ent, rule.required)){
-      rule.required.forEach(k=>{ if(ent[k]===undefined) missing.push(k) });
-    }
-    if(t==='FAQPage' && Array.isArray(ent.mainEntity)){
-      ent.mainEntity.forEach((q,i)=>{
-        if(!hasAll(q, ['@type','name','acceptedAnswer'])) missing.push(`mainEntity[${i}]`);
-        if(q.acceptedAnswer && q.acceptedAnswer.text===undefined) missing.push(`acceptedAnswer.text@${i}`);
-      });
-    }
-    if(t==='VideoObject' && !missing.length){
-      const alt = (rule.alt||[]).some(k=> ent[k]!==undefined);
-      if(!alt) missing.push('contentUrl/embedUrl/uploadDate(중 1)');
-    }
-    return {type:t, missing};
-  }
-
-  function renderSchema(){
-    const content = getVal('content');
-    const list = extractJsonLd(content);
-    const hints = detectMicrodata(content);
-    const results=[]; list.forEach(ent=>{ const v=validateEntity(ent); if(v) results.push(v) });
-    const root = document.querySelector('#_schemaCard_ .content');
-    if(!root) return; root.innerHTML='';
-
-    const summary = document.createElement('div');
-    summary.innerHTML = `<div class="row" style="gap:12px;flex-wrap:wrap">
-      <span class="tag">JSON‑LD 스니펫: ${list.length}개</span>
-      <span class="tag">Microdata 힌트: ${hints.length}개</span>
-    </div>`;
-    root.appendChild(summary);
-
-    if(!results.length){
-      const p=document.createElement('div'); p.className='small'; p.textContent='감지된 지원 타입 없음(또는 필수 속성 충족).'; root.appendChild(p);
-    } else {
-      results.forEach(r=>{
-        const div=document.createElement('div'); div.className='item';
-        const ok = r.missing.length===0;
-        div.innerHTML = `<div class="dot ${ok?'ok':'warn'}"></div>
-          <div><div class="msg">@type: <b>${r.type}</b> — ${ok?'요건 충족':'누락: '+r.missing.join(', ')}</div>
-          <div class="hint">필수 속성은 Google 리치 결과 가이드를 기준으로 간소화한 체크입니다.</div></div>`;
-        root.appendChild(div);
-      });
-    }
-  }
-
-  function firstImageSrcFromContent(html){
-    const m = html.match(/<img[^>]*src=\"([^\"]+)\"/i) || html.match(/!\[[^\]]*\]\(([^\)]+)\)/);
-    return m? m[1] : '';
-  }
-  function canonicalUrl(){
-    const dom = domainFromState(); const slug = slugFromState();
-    if(dom){
-      const proto = /^https?:\/\//i.test(dom)? '' : 'https://';
-      return proto + dom.replace(/\/$/,'') + '/' + (slug||'');
-    }
-    return (location.origin||'') + '/' + (slug||'');
-  }
-  function buildOgTwitter(){
-    const title = getVal('title').trim();
-    const desc = getVal('desc').trim();
-    const url = canonicalUrl();
-    let img = firstImageSrcFromContent(getVal('content'));
-    if(!img) img = 'https://example.com/og-default-1200x630.png';
-    const meta = [
-      `<meta property="og:title" content="${title}">`,
-      `<meta property="og:description" content="${desc}">`,
-      `<meta property="og:type" content="article">`,
-      `<meta property="og:url" content="${url}">`,
-      `<meta property="og:image" content="${img}">`,
-      `<meta property="og:locale" content="ko_KR">`,
-      `<meta name="twitter:card" content="summary_large_image">`,
-      `<meta name="twitter:title" content="${title}">`,
-      `<meta name="twitter:description" content="${desc}">`,
-      `<meta name="twitter:image" content="${img}">`
-    ].join('\n');
-    return meta;
-  }
-  function renderOG(){
-    const root = document.querySelector('#_ogCard_ .content'); if(!root) return; root.innerHTML='';
-    const pre = document.createElement('pre'); pre.className='mono';
-    pre.textContent = buildOgTwitter();
-    const row = document.createElement('div'); row.className='row'; row.style.marginTop='8px';
-    const btn = document.createElement('button'); btn.className='btn'; btn.textContent=(typeof getDict==='function'? (getDict().copy_meta||'메타 태그 복사') : '메타 태그 복사');
-    btn.onclick=()=>navigator.clipboard.writeText(pre.textContent).then(()=>showToast('메타 태그를 복사했어요 ✅','ok'));
-    row.appendChild(btn); root.appendChild(pre); root.appendChild(row);
-  }
-
-  function eeatScore(){
-    const content = getVal('content'); const domain = domainFromState();
-    const hasAuthor = /(작성자|author|by\s+[a-z가-힣])/i.test(content);
-    const hasDate = /\b(20\d{2})[./-](0?[1-9]|1[0-2])[./-](0?[1-9]|[12]\d|3[01])\b/i.test(content) || /(업데이트|최종 수정)/.test(content);
-    const links = (content.match(/<a[^>]*href=\"([^\"]+)\"/gi)||[]).map(x=>x);
-    const ext = links.filter(x=>/https?:\/\//i.test(x) && (!domain || !x.includes(domain))).length;
-    const contact = /(\/about|\/contact|\/privacy|\/policy)/i.test(content);
-    const phone = /(\+?\d{1,3}[-.\s]?)?(0\d{1,2}[-.\s]?\d{3,4}[-.\s]?\d{4})/.test(content);
-    const address = /(서울|경기|인천|부산|대구|광주|대전|울산|제주|도로명|번지)/.test(content);
-
-    let score=0; const notes=[];
-    if(hasAuthor){score+=15}else notes.push('저자 정보(이름/프로필) 추가 권장');
-    if(hasDate){score+=10}else notes.push('게시/수정일 표기');
-    if(ext>=2){score+=20}else notes.push('신뢰할 수 있는 외부 출처 2개 이상 인용');
-    if(contact){score+=15}else notes.push('About/Contact/정책 페이지 내부 링크 추가');
-    if(phone){score+=5}else notes.push('연락처(전화) 또는 상담 채널 표기');
-    if(address){score+=5}else notes.push('사업자 주소/오프라인 정보 표기 고려');
-    const hasMedia = /<img|!\[|<video|<iframe/i.test(content);
-    if(hasMedia) score+=10; else notes.push('핵심 섹션에 관련 이미지/도표 추가');
-    const words = (content.replace(/<[^>]+>/g,' ').trim().split(/\s+/).filter(Boolean)||[]).length;
-    if(words>=800) score+=10; else notes.push('충분한 설명(800+ 단어) 제공');
-
-    score = Math.min(100, score);
-    return {score, notes};
-  }
-  function renderEEAT(){
-    const root = document.querySelector('#_eeatCard_ .content'); if(!root) return; root.innerHTML='';
-    const {score, notes} = eeatScore();
-    const head = document.createElement('div'); head.innerHTML = `<div class="score">${score}</div>`;
-    root.appendChild(head);
-    const ul = document.createElement('ul'); ul.className='small';
-    notes.forEach(n=>{ const li=document.createElement('li'); li.textContent='• '+n; ul.appendChild(li) });
-    root.appendChild(ul);
-  }
-
-  const runAll = ()=>{ try{ renderSchema(); renderOG(); renderEEAT(); }catch(e){ console.warn(e) } };
-  const ids=['focus','title','desc','slug','domain','usedKeywords','pillar','content'];
-  ids.forEach(id=>{ const el=document.querySelector('#'+id); if(el){ el.addEventListener('input', runAll) }});
-  runAll();
-})();
+}catch(e){}
 </script>
 </body>
 </html>
